@@ -67,10 +67,8 @@ class CausalSelfKernel:
         Returns:
             bool: True if integrity check passes
         """
-        kernel_data = json.dumps(self.config, sort_keys=True).encode('utf-8')
-        computed_hash = hashlib.sha256(kernel_data).hexdigest()
-        
-        # Check against the integrity hash anchor
+        # For now, we verify against the known INTEGRITY_HASH constant
+        # In a real implementation, this could also compute a hash of the kernel config
         self.integrity_verified = (expected_hash == INTEGRITY_HASH)
         
         if self.integrity_verified:
